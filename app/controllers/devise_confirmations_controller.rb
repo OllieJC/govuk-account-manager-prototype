@@ -22,6 +22,11 @@ class DeviseConfirmationsController < Devise::ConfirmationsController
     end
   end
 
+  def new
+    super
+    @email = current_user&.unconfirmed_email || current_user&.email
+  end
+
   def after_resending_confirmation_instructions_path_for(_resource_name)
     confirmation_email_sent_path(email: resource.unconfirmed_email, user_is_confirmed: resource.confirmed?)
   end
