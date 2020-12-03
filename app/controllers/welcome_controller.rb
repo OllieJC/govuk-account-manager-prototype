@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
 
     redirect_to after_login_path(payload, current_user) and return if current_user
 
+
     @email = params.dig(:user, :email)
     if @email
       if @email.blank?
@@ -37,20 +38,6 @@ class WelcomeController < ApplicationController
   end
 
 protected
-
-  def after_login_path(payload, user)
-    payload&.dig(:post_login_oauth).presence || after_sign_in_path_for(user)
-  end
-
-  def create_login_state(payload, email)
-    user = User.find_by(email: email).id
-
-    LoginState.create!(
-      created_at: Time.zone.now,
-      user_id: user,
-      redirect_path: after_login_path(payload, user),
-    )
-  end
 
   def create_registration_state(payload, email)
     RegistrationState.create!(
