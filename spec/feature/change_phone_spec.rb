@@ -101,10 +101,8 @@ RSpec.feature "Change Phone" do
   end
 
   def log_in
-    visit "/"
+    visit user_session_path
     fill_in "email", with: user.email
-    click_on I18n.t("welcome.show.button.label")
-
     fill_in "password", with: user.password
     click_on I18n.t("devise.sessions.new.fields.submit.label")
 
