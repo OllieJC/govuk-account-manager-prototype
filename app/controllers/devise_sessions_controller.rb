@@ -112,7 +112,19 @@ protected
     response["Set-Cookie"] = cookies_policy_header(login_state.user)
 
     sign_in(resource_name, login_state.user)
-    redirect_to login_state.redirect_path
+
+    url =
+      if params[:_ga]
+        if login_state.redirect_path.include? "?"
+          "#{login_state.redirect_path}&_ga=#{params[:_ga]}"
+        else
+          "#{login_state.redirect_path}?_ga=#{params[:_ga]}"
+        end
+      else
+        login_state.redirect_path
+      end
+
+    redirect_to url
   end
 
   def after_sign_out_path_for(_resource)
