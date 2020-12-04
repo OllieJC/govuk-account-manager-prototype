@@ -1,7 +1,7 @@
 RSpec.describe "welcome" do
   describe "GET" do
     it "renders the welcome page" do
-      get new_user_session_url
+      get welcome_path
 
       expect(response.body).to have_content(I18n.t("welcome.heading"))
     end
@@ -15,7 +15,7 @@ RSpec.describe "welcome" do
     end
 
     it "redirects the user to the account page" do
-      get new_user_session_url
+      get welcome_path
 
       expect(response).to redirect_to(user_root_path)
     end

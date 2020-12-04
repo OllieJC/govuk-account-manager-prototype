@@ -3,14 +3,14 @@
 Rails.application.routes.draw do
   devise_for :users, skip: :all
   devise_scope :user do
-    get  "/", to: "welcome#show", as: :new_user_session
+    get  "/", to: "welcome#show", as: :welcome
     post "/", to: "welcome#show"
 
     get "/feedback", to: "feedback#show", as: :feedback_form
     post "/feedback", to: "feedback#submit", as: :feedback_form_submitted
 
     scope "/login" do
-      get  "/", to: "devise_sessions#create", as: :user_session
+      get  "/", to: "devise_sessions#create", as: :new_user_session
       post "/", to: "devise_sessions#create"
       get  "/phone/code", to: "devise_sessions#phone_code", as: :user_session_phone_code
       post "/phone/verify", to: "devise_sessions#phone_verify", as: :user_session_phone_verify
