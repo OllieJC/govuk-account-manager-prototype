@@ -112,7 +112,10 @@ Rails.application.routes.draw do
 
   mount GovukPublishingComponents::Engine, at: "/component-guide" if Rails.env.development?
 
-  use_doorkeeper
+  use_doorkeeper do
+    controllers authorizations: "doorkeeper_authorizations"
+  end
+
   use_doorkeeper_openid_connect
 
   get "/404", to: "standard_errors#not_found"

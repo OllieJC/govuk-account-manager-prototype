@@ -44,5 +44,11 @@ RSpec.describe "/oauth/authorize" do
 
       expect(response.redirect_url).not_to be_nil
     end
+
+    it "preserves the _ga parameter in the redirect" do
+      get authorization_endpoint_url(client: application, scope: "openid transition_checker", _ga: "foo")
+
+      expect(response.redirect_url).to include("_ga=foo")
+    end
   end
 end
