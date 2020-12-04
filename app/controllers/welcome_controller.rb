@@ -6,7 +6,6 @@ class WelcomeController < ApplicationController
 
     redirect_to after_login_path(payload, current_user) and return if current_user
 
-
     @email = params.dig(:user, :email)
     if @email
       if @email.blank?

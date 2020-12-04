@@ -1,4 +1,4 @@
-<% content_for :title, t("devise.registrations.start.fields.password.label") %>
+<% content_for :title, t("devise.registrations.start.heading") %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -7,12 +7,34 @@
         <%= render "devise/shared/error_messages", resource: resource, resource_error_messages: @resource_error_messages %>
       <% end %>
 
+      <%= render "govuk_publishing_components/components/heading", {
+        text: yield(:title),
+        heading_level: 1,
+        font_size: "xl",
+        margin_top: 0,
+        margin_bottom: 3,
+      } %>
+
+      <% if params[:jwt] %>
+        <%= hidden_field_tag :jwt, params[:jwt] %>
+      <% end %>
+
       <%= render "govuk_publishing_components/components/input", {
         label: {
-          text: yield(:title),
+          text: t("devise.registrations.start.fields.email.label"),
         },
-        heading_level: 1,
-        heading_size: "xl",
+        name: "user[email]",
+        type: "email",
+        id: "email",
+        value: @email,
+        error_message: devise_error_items(:email, @resource_error_messages),
+        autocomplete: "email",
+      } %>
+
+      <%= render "govuk_publishing_components/components/input", {
+        label: {
+          text: t("devise.registrations.start.fields.password.label"),
+        },
         hint: t("devise.registrations.start.fields.password.hint"),
         name: "user[password]",
         type: "password",
@@ -23,13 +45,15 @@
 
       <%= render "govuk_publishing_components/components/input", {
         label: {
-          text: t("devise.registrations.start.fields.password_confirm.label"),
+          text: t("devise.registrations.start.fields.phone.label"),
         },
-        name: "user[password_confirmation]",
-        type: "password",
-        id: "password_confirmation",
-        error_message: devise_error_items(:password_confirmation, @resource_error_messages),
-        autocomplete: "new-password",
+        hint: t("devise.registrations.start.fields.phone.hint"),
+        name: "user[phone]",
+        id: "phone",
+        value: @phone,
+        width: 10,
+        error_message: devise_error_items(:phone, @resource_error_messages),
+        autocomplete: "tel",
       } %>
 
       <%= render "govuk_publishing_components/components/button", {
