@@ -1,6 +1,7 @@
 class DeviseSessionsController < Devise::SessionsController
   include ApplicationHelper
   include CookiesHelper
+  include UrlHelper
 
   before_action :check_login_state, only: %i[
     create
@@ -113,18 +114,7 @@ protected
 
     sign_in(resource_name, login_state.user)
 
-    url =
-      if params[:_ga]
-        if login_state.redirect_path.include? "?"
-          "#{login_state.redirect_path}&_ga=#{params[:_ga]}"
-        else
-          "#{login_state.redirect_path}?_ga=#{params[:_ga]}"
-        end
-      else
-        login_state.redirect_path
-      end
-
-    redirect_to url
+    redirect_to add_param_to_url(login_state.redirect_path, "_ga", params[:_ga])
   end
 
   def after_sign_out_path_for(_resource)
