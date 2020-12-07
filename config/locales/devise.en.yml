@@ -192,7 +192,7 @@ en:
           email:
             label: Email address
           password:
-            hint: It needs to be at least 8 characters long.
+            hint: It needs to be at least 8 characters long
             label: Password
           phone:
             hint: We’ll send you a security code by text message
