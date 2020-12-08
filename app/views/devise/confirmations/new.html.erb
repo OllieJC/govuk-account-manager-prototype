@@ -18,7 +18,7 @@
         type: "email",
         id: "email",
         value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
-        autocomplete: "email",
+        autocomplete: "username",
       } %>
 
       <%= render "govuk_publishing_components/components/button", {
