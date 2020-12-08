@@ -7,6 +7,8 @@
         <%= render "devise/shared/error_messages", resource: resource, resource_error_messages: @resource_error_messages %>
       <% end %>
 
+      <%= email_field_tag :"user[email]", @login_state.user.email, style: "display:none", autocomplete: "off", "aria-hidden": true %>
+    
       <%= render "govuk_publishing_components/components/input", {
         label: {
           text: yield(:title),
