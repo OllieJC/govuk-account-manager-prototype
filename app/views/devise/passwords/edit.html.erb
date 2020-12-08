@@ -17,6 +17,7 @@
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do %>
       <%= render "devise/shared/error_messages", resource: resource %>
+      <%= email_field_tag :"user[email]", "USERS-EMAIL-HERE", style: "display:none", autocomplete: "off", "aria-hidden": true %>
       <%= hidden_field_tag "user[reset_password_token]", params[:reset_password_token] %>
 
       <%= render "govuk_publishing_components/components/input", {
