@@ -15,7 +15,7 @@
         <%= render "devise/shared/error_messages", resource: resource %>
       <% end %>
 
-      <%= hidden_field_tag :"user[email]", @login_state.user.email %>
+      <%= email_field_tag :"user[email]", @login_state.user.email, style: "display:none", autocomplete: "off", "aria-hidden": true %>
 
       <%= render "govuk_publishing_components/components/input", {
         label: {
